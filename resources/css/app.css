@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input[type="date"]::-webkit-datetime-edit {
+    color: transparent; /* Membuat teks tanggal tidak terlihat */
+}
+
+/* Menyembunyikan spinner (tombol untuk mengubah tanggal secara manual) */
+input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+}
+
+/* Menyembunyikan tombol kalender default */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}

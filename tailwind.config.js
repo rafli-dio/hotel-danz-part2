@@ -10,6 +10,13 @@ export default {
             fontFamily: {
                 poppins: ['"Poppins"', "sans-serif"], // Tambahkan nama font
             },
+            colors: {
+                cream: {
+                    100: "#FFFDD0",
+                    200: "#FAF3E0",
+                    300: "#F5F5DC",
+                },
+            },
         },
     },
     plugins: [],

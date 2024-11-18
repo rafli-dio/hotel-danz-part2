@@ -13,11 +13,11 @@
     
 </head>
 <body>
-    @include('components.navbar')
-    @include('components.jumbotron')
-    @include('components.about')
-    @include('components.room')
-    @include('components.facilites')
-    @include('components.footer')
+    @include('components-user.navbar')
+    @include('components-user.jumbotron')
+    @include('components-user.about')
+    @include('components-user.room')
+    @include('components-user.facilites')
+    @include('components-user.footer')
 </body>
 </html>

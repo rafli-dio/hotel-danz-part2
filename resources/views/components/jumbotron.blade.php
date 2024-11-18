@@ -36,24 +36,25 @@
     </div>
 
     <!-- Check In Input -->
-    <div class="relative w-full lg:w-[300px]">
-      <label for="check-in" class="absolute left-10 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
-        Check In
-      </label>
-      <i class="fas fa-calendar-alt text-xl absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-      <input type="date" class="p-2 pl-10 border rounded-xl bg-gray-200 w-full" id="check-in">
-      <i class="fas fa-chevron-down text-xl absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
-    </div>
+<!-- Check In Input -->
+<div class="relative w-full lg:w-[300px]">
+  <label for="check-in" class="absolute left-10 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" id="check-in-label">
+    Check In
+  </label>
+  <i class="fas fa-calendar-alt text-xl absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+  <input type="date" class="p-2 pl-10 border rounded-xl bg-gray-200 w-full" id="check-in">
+  <i class="fas fa-chevron-down text-xl absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+</div>
 
-    <!-- Check Out Input -->
-    <div class="relative w-full lg:w-[300px]">
-      <label for="check-out" class="absolute left-10 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none">
-        Check Out
-      </label>
-      <i class="fas fa-calendar-alt text-xl absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-      <input type="date" class="p-2 pl-10 border rounded-xl bg-gray-200 w-full" id="check-out">
-      <i class="fas fa-chevron-down text-xl absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
-    </div>
+<!-- Check Out Input -->
+<div class="relative w-full lg:w-[300px]">
+  <label for="check-out" class="absolute left-10 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none" id="check-out-label">
+    Check Out
+  </label>
+  <i class="fas fa-calendar-alt text-xl absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+  <input type="date" class="p-2 pl-10 border rounded-xl bg-gray-200 w-full" id="check-out">
+  <i class="fas fa-chevron-down text-xl absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 pointer-events-none"></i>
+</div>
 
     <!-- Jumlah Orang Input yang Lebar Lebih Kecil -->
     <div class="relative w-full lg:w-[200px]">
@@ -67,9 +68,6 @@
       <span class="flex items-center justify-center">Search</span>
       <i class="fas fa-arrow-right text-white ml-auto"></i>
     </button>
-
-
-
     </div>
   </form>
   </div>

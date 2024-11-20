@@ -4,6 +4,8 @@ const navbar = document.getElementById("navbar");
 menuToggle.addEventListener("click", () => {
     navbar.classList.toggle("hidden");
 });
+
+// check in check out
 function updateLabel(inputId, labelId) {
     const input = document.getElementById(inputId);
     const label = document.getElementById(labelId);
@@ -30,6 +32,7 @@ function updateLabel(inputId, labelId) {
 updateLabel("check-in", "check-in-label");
 updateLabel("check-out", "check-out-label");
 
+// slider facilities
 const slider = document.getElementById("slider");
 const prevButton = document.getElementById("prev");
 const nextButton = document.getElementById("next");
@@ -43,8 +46,32 @@ prevButton.addEventListener("click", () => {
 
 nextButton.addEventListener("click", () => {
     const totalCards = slider.children.length;
-    const visibleCards = 4; // Jumlah kartu yang terlihat
+    const visibleCards = 4;
     const maxIndex = totalCards - visibleCards;
     currentIndex = Math.min(maxIndex, currentIndex + 1);
     slider.style.transform = `translateX(-${currentIndex * 29}%)`;
+});
+
+// slider room
+const sliderRoom = document.getElementById("slider-room");
+const prevButtonRoom = document.getElementById("prev-room");
+const nextButtonRoom = document.getElementById("next-room");
+
+let currentIndexRoom = 0;
+
+prevButtonRoom.addEventListener("click", () => {
+    // Menghindari index negatif
+    currentIndexRoom = Math.max(0, currentIndexRoom - 1);
+    sliderRoom.style.transform = `translateX(-${currentIndexRoom * 29}%)`;
+    // 29% karena mempertimbangkan gap antar elemen
+});
+
+nextButtonRoom.addEventListener("click", () => {
+    const totalCardsRoom = sliderRoom.children.length;
+    const visibleCardsRoom = 4;
+    const maxIndexRoom = totalCardsRoom - visibleCardsRoom;
+
+    // Mencegah melampaui jumlah kartu
+    currentIndexRoom = Math.min(maxIndexRoom, currentIndexRoom + 1);
+    sliderRoom.style.transform = `translateX(-${currentIndexRoom * 29}%)`;
 });

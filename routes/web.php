@@ -26,6 +26,12 @@ Route::get('/', [WelcomeController::class, 'index']);
 Route::get('/admin', [DashboardAdminController::class, 'index']);
 Route::get('/admin-tamu', [TamuController::class, 'index'])->name('get-tamu');
 Route::get('/admin-staf', [StafController::class, 'index'])->name('get-staf');
+
+// tipe kamar
 Route::get('/admin-tipe-kamar', [TipeKamarController::class, 'index'])->name('get-tipe-kamar');
+Route::post('save-tipe-kamar',[TipeKamarController::class, 'store'])->name('save-tipe-kamar');
+Route::put('/admin-tipe-kamar/{id}/update', [TipeKamarController::class, 'update'])->name('update-tipe-kamar');
+Route::delete('/admin-tipe-kamar/{id}', [TipeKamarController::class, 'destroy'])->name('delete-tipe-kamar');
+// kamar
 Route::get('/admin-kamar', [KamarController::class, 'index'])->name('get-kamar');
 Route::get('/admin-reservasi', [ReservasiController::class, 'index'])->name('get-reservasi');

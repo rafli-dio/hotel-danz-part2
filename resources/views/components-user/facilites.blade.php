@@ -104,7 +104,7 @@
         <img src="{{ asset('assets/images/facilities/tennis.jpeg') }}" alt="Tennis Court"
           class="w-full h-56 object-cover">
         <div class="p-4">
-          <h3 class="text-lg font-semibold mb-2">Tennis Court</h3>
+          <h3 class="text-lg font-semibold mb-2"></h3>
           <p class="text-gray-600">
             Nikmati bermain tenis di lapangan tenis outdoor kami dengan fasilitas lengkap.
           </p>

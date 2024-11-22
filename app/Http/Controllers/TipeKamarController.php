@@ -121,17 +121,17 @@ class TipeKamarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-{
-    try {
-        $tipekamar = TipeKamar::findOrFail($id);
-        if ($tipekamar->gambar_kamar && file_exists(storage_path('app/public/' . $tipekamar->gambar_kamar))) {
-            unlink(storage_path('app/public/' . $tipekamar->gambar_kamar));
+    {
+        try {
+            $tipekamar = TipeKamar::findOrFail($id);
+            if ($tipekamar->gambar_kamar && file_exists(storage_path('app/public/' . $tipekamar->gambar_kamar))) {
+                unlink(storage_path('app/public/' . $tipekamar->gambar_kamar));
+            }
+            $tipekamar->delete();
+            return redirect()->route('get-tipe-kamar');
+        } catch (\Exception $e) {
+            return redirect()->route('get-tipe-kamar');
         }
-        $tipekamar->delete();
-        return redirect()->route('get-tipe-kamar');
-    } catch (\Exception $e) {
-        return redirect()->route('get-tipe-kamar');
     }
-}
 
 }

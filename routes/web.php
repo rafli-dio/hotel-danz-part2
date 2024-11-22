@@ -34,4 +34,10 @@ Route::put('/admin-tipe-kamar/{id}/update', [TipeKamarController::class, 'update
 Route::delete('/admin-tipe-kamar/{id}', [TipeKamarController::class, 'destroy'])->name('delete-tipe-kamar');
 // kamar
 Route::get('/admin-kamar', [KamarController::class, 'index'])->name('get-kamar');
+Route::post('save-kamar',[KamarController::class, 'store'])->name('save-kamar');
+Route::put('/admin-kamar/{id}/update', [KamarController::class, 'update'])->name('update-kamar');
+Route::delete('/admin-kamar/{id}', [KamarController::class, 'destroy'])->name('delete-kamar');
+
+
+
 Route::get('/admin-reservasi', [ReservasiController::class, 'index'])->name('get-reservasi');

@@ -12,84 +12,13 @@
   <div class="overflow-hidden relative">
     <div id="slider-room" class="flex gap-6 transition-transform duration-300 ease-in-out">
       <!-- Cards -->
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex-shrink-0 w-full sm:w-[calc(100%/2)] md:w-[calc(100%/3)] lg:w-[calc(100%/4)]">
-        <img src="https://via.placeholder.com/300x200" alt="Swiss Alps" class="w-full h-[200px] object-cover">
-        <div class="p-4">
-          <h3 class="text-lg font-medium">Swiss Alps</h3>
-          <p class="text-gray-500">$460 starting</p>
-          <div class="flex items-center mt-2">
-            <span class="text-yellow-400 text-sm">★</span>
-            <span class="ml-1 text-sm text-gray-600">4.8</span>
-          </div>
-        </div>
-      </div>
-      <!-- Tambahkan kartu lainnya -->
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex-shrink-0 w-full sm:w-[calc(100%/2)] md:w-[calc(100%/3)] lg:w-[calc(100%/4)]">
-        <img src="https://via.placeholder.com/300x200" alt="Swiss Alps" class="w-full h-[200px] object-cover">
-        <div class="p-4">
-          <h3 class="text-lg font-medium">Swiss Alps</h3>
-          <p class="text-gray-500">$460 starting</p>
-          <div class="flex items-center mt-2">
-            <span class="text-yellow-400 text-sm">★</span>
-            <span class="ml-1 text-sm text-gray-600">4.8</span>
-          </div>
-        </div>
-      </div>
-      <!-- Tambahkan kartu lainnya -->
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex-shrink-0 w-full sm:w-[calc(100%/2)] md:w-[calc(100%/3)] lg:w-[calc(100%/4)]">
-        <img src="https://via.placeholder.com/300x200" alt="Swiss Alps" class="w-full h-[200px] object-cover">
-        <div class="p-4">
-          <h3 class="text-lg font-medium">Swiss Alps</h3>
-          <p class="text-gray-500">$460 starting</p>
-          <div class="flex items-center mt-2">
-            <span class="text-yellow-400 text-sm">★</span>
-            <span class="ml-1 text-sm text-gray-600">4.8</span>
-          </div>
-        </div>
-      </div>
-      <!-- Tambahkan kartu lainnya -->
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex-shrink-0 w-full sm:w-[calc(100%/2)] md:w-[calc(100%/3)] lg:w-[calc(100%/4)]">
-        <img src="https://via.placeholder.com/300x200" alt="Swiss Alps" class="w-full h-[200px] object-cover">
-        <div class="p-4">
-          <h3 class="text-lg font-medium">Swiss Alps</h3>
-          <p class="text-gray-500">$460 starting</p>
-          <div class="flex items-center mt-2">
-            <span class="text-yellow-400 text-sm">★</span>
-            <span class="ml-1 text-sm text-gray-600">4.8</span>
-          </div>
-        </div>
-      </div>
-      <!-- Tambahkan kartu lainnya -->
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex-shrink-0 w-full sm:w-[calc(100%/2)] md:w-[calc(100%/3)] lg:w-[calc(100%/4)]">
-        <img src="https://via.placeholder.com/300x200" alt="Swiss Alps" class="w-full h-[200px] object-cover">
-        <div class="p-4">
-          <h3 class="text-lg font-medium">Swiss Alps</h3>
-          <p class="text-gray-500">$460 starting</p>
-          <div class="flex items-center mt-2">
-            <span class="text-yellow-400 text-sm">★</span>
-            <span class="ml-1 text-sm text-gray-600">4.8</span>
-          </div>
-        </div>
-      </div>
-      <!-- Tambahkan kartu lainnya -->
-      <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex-shrink-0 w-full sm:w-[calc(100%/2)] md:w-[calc(100%/3)] lg:w-[calc(100%/4)]">
-        <img src="https://via.placeholder.com/300x200" alt="Swiss Alps" class="w-full h-[200px] object-cover">
-        <div class="p-4">
-          <h3 class="text-lg font-medium">Swiss Alps</h3>
-          <p class="text-gray-500">$460 starting</p>
-          <div class="flex items-center mt-2">
-            <span class="text-yellow-400 text-sm">★</span>
-            <span class="ml-1 text-sm text-gray-600">4.8</span>
-          </div>
-        </div>
-      </div>
-      <!-- Tambahkan kartu lainnya -->
+     
       @foreach($tipekamar as $tipe)
       <div class="bg-white rounded-2xl shadow-lg overflow-hidden flex-shrink-0 w-full sm:w-[calc(100%/2)] md:w-[calc(100%/3)] lg:w-[calc(100%/4)]">
         <img src="{{ asset('storage/' . $tipe->gambar_kamar) }}" alt="Swiss Alps" class="w-full h-[200px] object-cover">
         <div class="p-4">
           <h3 class="text-lg font-medium">{{ $tipe->nama_tipe_kamar }}s</h3>
-          <p class="text-gray-500">RP.{{ number_format($tipe->harga_kamar, 0, ',', '.') }}</p>
+          <p class="text-gray-500">Rp. {{ number_format($tipe->harga_kamar, 0, ',', '.') }}</p>
           <div class="flex items-center mt-2">
             <span class="text-yellow-400 text-sm">★</span>
             <span class="ml-1 text-sm text-gray-600">{{ number_format(rand(45, 50) / 10, 1) }}</span>

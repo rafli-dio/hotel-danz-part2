@@ -16,4 +16,9 @@ class TipeKamar extends Model
         'deskripsi_kamar',
         'gambar_kamar',
     ];
+
+    public function kamar()
+    {
+        return $this->hasMany(Kamar::class, 'tipe_kamar_id', 'id');
+    }
 }

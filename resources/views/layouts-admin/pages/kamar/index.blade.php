@@ -53,23 +53,24 @@
           </div>
           <!-- Tipe Kamar -->
           <div class="mb-3">
-            <label for="tipe_kamar_id" class="form-label">Tipe Kamar</label>
-            <select class="form-control" id="tipe_kamar_id" name="tipe_kamar_id" required>
-                @foreach($tipekamar as $tipekamars)
-                    <option value="{{ $kamars->tipe_kamar_id }}">
-                            {{ $tipekamars->nama_tipe_kamar}}
-                    </option>
-                @endforeach
-            </select>
+              <label for="tipe_kamar_id" class="form-label">Tipe Kamar</label>
+              <select class="form-control" id="tipe_kamar_id" name="tipe_kamar_id" required>
+                  @foreach ($tipekamar as $tipekamars)
+                      <option value="{{ $tipekamars->id }}" 
+                          {{ $tipekamars->id == $kamars->tipe_kamar_id ? 'selected' : '' }}>
+                          {{ $tipekamars->nama_tipe_kamar }}
+                      </option>
+                  @endforeach
+              </select>
           </div>
           <!-- Status Tersedia -->
-            <div class="mb-3">
-                <label for="status_tersedia" class="form-label">Status Tersedia</label>
-                <select class="form-control" id="status_tersedia" name="status_tersedia" required>
-                    <option value="{{$kamars->status_tersedia}}">Tersedia</option>
-                    <option value="0">Tidak Tersedia</option>
-                </select>
-            </div>
+          <div class="mb-3">
+              <label for="status_tersedia" class="form-label">Status Tersedia</label>
+              <select class="form-control" id="status_tersedia" name="status_tersedia" required>
+                  <option value="1" {{ $kamars->status_tersedia == 1 ? 'selected' : '' }}>Tersedia</option>
+                  <option value="0" {{ $kamars->status_tersedia == 0 ? 'selected' : '' }}>Tidak Tersedia</option>
+              </select>
+          </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
             <button type="submit" class="btn btn-primary">Perbarui Data</button>

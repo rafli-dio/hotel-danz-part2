@@ -14,7 +14,8 @@ class TamuController extends Controller
      */
     public function index()
     {
-        return view('layouts-admin.pages.tamu.index');
+        $tamu = Tamu::all();
+        return view('layouts-admin.pages.tamu.index', compact('tamu'));
     }
 
     public function getRegistrasi()
@@ -48,10 +49,10 @@ class TamuController extends Controller
             'password' => [
                 'required',
                 'confirmed',
-                'min:8', 
-                'regex:/[a-z]/', 
-                'regex:/[A-Z]/', 
-                'regex:/[0-9]/', 
+                'min:8',
+                'regex:/[a-z]/',
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/',
             ],
         ], [
             'password.required' => 'Password wajib diisi.',
@@ -59,7 +60,7 @@ class TamuController extends Controller
             'password.min' => 'Password harus minimal 8 karakter.',
             'password.regex' => 'Password harus mengandung setidaknya satu huruf besar, huruf kecil, dan angka.',
         ]);
-    
+        
         Tamu::create([
             'nama_panjang' => $request->nama_panjang,
             'email' => $request->email,
@@ -67,7 +68,10 @@ class TamuController extends Controller
             'nomor_telepon' => $request->nomor_telepon,
             'password' => Hash::make($request->password),
         ]);
-        return redirect()->route('get-login');
+        
+        
+        return redirect()->route('get-tamu');
+        
     }
 
     
@@ -113,6 +117,8 @@ class TamuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $tamu = Tamu::findOrFail($id);
+        $tamu->delete();
+        return redirect()->route('get-tamu');
     }
 }

@@ -16,6 +16,7 @@ class Tamu extends Model
         'alamat',
         'nomor_telepon',
         'password',
+        'role'
     ];
 
     protected $hidden = [

@@ -71,7 +71,7 @@
                 @enderror
             </div>
 
-            <div>
+            <div class="relative">
                 <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
                 <input 
                     type="password" 
@@ -80,12 +80,19 @@
                     required 
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
                 >
+                <span 
+                    class="absolute inset-y-0 right-4 flex items-center cursor-pointer top-[20px]" 
+                    onclick="togglePassword('password', this)">
+                    <svg id="icon-password" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 3c-5 0-9 3.58-9 7 0 3.42 4 7 9 7s9-3.58 9-7c0-3.42-4-7-9-7zm0 12c-3.33 0-6.22-2.02-7.45-4 1.23-1.98 4.12-4 7.45-4s6.22 2.02 7.45 4c-1.23 1.98-4.12 4-7.45 4zm0-6a2 2 0 110 4 2 2 0 010-4z" />
+                    </svg>
+                </span>
                 @error('password')
                     <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                 @enderror
             </div>
 
-            <div>
+            <div class="relative mt-4">
                 <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
                 <input 
                     type="password" 
@@ -94,7 +101,14 @@
                     required 
                     class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500"
                 >
-            </div>
+                <span 
+                    class="absolute inset-y-0 right-4 flex items-center cursor-pointer top-[20px]" 
+                    onclick="togglePassword('password_confirmation', this)">
+                    <svg id="icon-password_confirmation" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M10 3c-5 0-9 3.58-9 7 0 3.42 4 7 9 7s9-3.58 9-7c0-3.42-4-7-9-7zm0 12c-3.33 0-6.22-2.02-7.45-4 1.23-1.98 4.12-4 7.45-4s6.22 2.02 7.45 4c-1.23 1.98-4.12 4-7.45 4zm0-6a2 2 0 110 4 2 2 0 010-4z" />
+                    </svg>
+                </span>
+</div>
 
             <button 
                 type="submit" 
@@ -105,4 +119,21 @@
         </form>
     </div>
 </body>
+<script>
+    function togglePassword(fieldId, iconElement) {
+        const input = document.getElementById(fieldId);
+        const icon = iconElement.querySelector('svg');
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.innerHTML = `
+                <path d="M10 3c-5 0-9 3.58-9 7 0 3.42 4 7 9 7s9-3.58 9-7c0-3.42-4-7-9-7zm0 12c-3.33 0-6.22-2.02-7.45-4 1.23-1.98 4.12-4 7.45-4s6.22 2.02 7.45 4c-1.23 1.98-4.12 4-7.45 4z" />
+            `;
+        } else {
+            input.type = 'password';
+            icon.innerHTML = `
+                <path d="M10 3c-5 0-9 3.58-9 7 0 3.42 4 7 9 7s9-3.58 9-7c0-3.42-4-7-9-7zm0 12c-3.33 0-6.22-2.02-7.45-4 1.23-1.98 4.12-4 7.45-4s6.22 2.02 7.45 4c-1.23 1.98-4.12 4-7.45 4zm0-6a2 2 0 110 4 2 2 0 010-4z" />
+            `;
+        }
+    }
+</script>
 </html>

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Tamu;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
-
+use Illuminate\Validation\Rule;
 class TamuController extends Controller
 {
     /**
@@ -70,7 +70,7 @@ class TamuController extends Controller
         ]);
         
         
-        return redirect()->route('get-tamu');
+        return redirect()->route('get-login');
         
     }
 
@@ -106,7 +106,46 @@ class TamuController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_panjang' => 'required|string|max:255',
+            'email' => [
+                'required',
+                'email',
+                Rule::unique('tamus', 'email')->ignore($id),
+            ],
+            'alamat' => 'required|string|max:255',
+            'nomor_telepon' => 'required|string|max:15',
+            'password' => [
+                'nullable', 
+                'confirmed', 
+                'min:8',
+                'regex:/[a-z]/', 
+                'regex:/[A-Z]/',
+                'regex:/[0-9]/', 
+            ],
+        ]);
+        
+        $tamu = Tamu::findOrFail($id);
+
+        if ($request->filled('password')) {
+            if (!$request->filled('old_password')) {
+                return back()->withErrors(['old_password' => 'Password lama harus diisi jika ingin mengganti password']);
+            }
+
+            if (!Hash::check($request->old_password, $tamu->password)) {
+                return back()->withErrors(['old_password' => 'Password lama tidak sesuai']);
+            }
+
+            $tamu->password = Hash::make($request->password);
+        }
+
+        $tamu->nama_panjang = $request->nama_panjang;
+        $tamu->email = $request->email;
+        $tamu->alamat = $request->alamat;
+
+        $tamu->save();
+
+        return redirect()->route('get-tamu');
     }
 
     /**

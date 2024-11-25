@@ -26,7 +26,7 @@ use App\Http\Controllers\ReservasiController;
     Route::get('/registrasi', [TamuController::class, 'getRegistrasi'])->name('get-registrasi');
     Route::post('save-tamu',[TamuController::class, 'registrasiAkunTamu'])->name('save-tamu');
     Route::delete('/admin-tamu/{id}', [TamuController::class, 'destroy'])->name('delete-tamu');
-
+    Route::put('/admin-tamu/{id}/update', [TamuController::class, 'update'])->name('update-tamu');
 
 // admin
     Route::get('/', [WelcomeController::class, 'index']);

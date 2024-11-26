@@ -35,9 +35,19 @@
                     <li>
                         <a href="#" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:hover:text-yellow-500">Facilities</a>
                     </li>
-                    <li>
-                        <a href="{{route('get-login')}}" class="block w-[100px] h-[30px] text-center bg-black text-white rounded-lg border border-black">Login</a>
-                    </li>
+                    @guest
+                        <li>
+                            <a href="{{ route('get-login') }}" class="block w-[100px] h-[30px] text-center bg-black text-white rounded-lg border border-black">Login</a>
+                        </li>
+                    @endguest
+                    @auth
+                        <li>
+                            <form action="{{route('get-logout')}}" method="POST" class="block">
+                                @csrf
+                                <button type="submit" class="w-[100px] h-[30px] text-center bg-black text-white rounded-lg border border-black">Logout</button>
+                            </form>
+                        </li>
+                    @endauth
                 </ul>
             </div>
         </div>

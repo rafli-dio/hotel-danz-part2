@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 use App\Models\Tamu;
+use App\Models\TipeKamar;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Auth;
+
 class TamuController extends Controller
 {
     /**
@@ -21,6 +24,13 @@ class TamuController extends Controller
     public function getRegistrasi()
     {
         return view('auth.registrasi');
+    }
+
+    public function getHomeTamu()
+    {
+        $tipekamar = TipeKamar::all();
+        $user = Auth::guard('tamu')->user();
+        return view('layouts-user.pages.home.home-tamu',compact('tipekamar','user'));
     }
 
     /**

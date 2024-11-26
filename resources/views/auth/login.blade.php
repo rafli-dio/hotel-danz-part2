@@ -28,7 +28,8 @@
                 <h1 class="self-center text-xl font-semibold whitespace-nowrap dark:text-black text-center">
                         Login Hotel<span class="text-blue-700 font-bold">Danz</span>
                 </h1>
-            <form action="#" method="POST" class="space-y-4">
+            <form action="{{route('post-login')}}" method="POST" class="space-y-4">
+                @csrf
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
                     <input 
@@ -66,7 +67,7 @@
                     Login
                 </button>
             </form>
-            <a href="{{ route('get-registrasi') }}">Registrasi Akun</a>
+            <a href="{{ route('get-registrasi') }}" class="block text-center text-blue-600 mt-4">Registrasi Akun</a>
         </div>
     </section>
 </body>

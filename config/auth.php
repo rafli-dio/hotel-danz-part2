@@ -40,6 +40,16 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+
+        'tamu' => [ 
+        'driver' => 'session',
+        'provider' => 'tamus',
+        ],
+
+        'user' => [
+            'driver' => 'session',
+            'provider' => 'users'
+        ],
     ],
 
     /*
@@ -63,6 +73,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+
+        'tamus' => [ 
+        'driver' => 'eloquent',
+        'model' => App\Models\Tamu::class,
         ],
 
         // 'users' => [

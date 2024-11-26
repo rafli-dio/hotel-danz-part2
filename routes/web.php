@@ -21,15 +21,13 @@ use App\Http\Controllers\ReservasiController;
 */
 // auth
     Route::get('/login', [LoginController::class, 'index'])->name('get-login');
-
-// Tamu
     Route::get('/registrasi', [TamuController::class, 'getRegistrasi'])->name('get-registrasi');
-    Route::post('save-tamu',[TamuController::class, 'registrasiAkunTamu'])->name('save-tamu');
-    Route::delete('/admin-tamu/{id}', [TamuController::class, 'destroy'])->name('delete-tamu');
-    Route::put('/admin-tamu/{id}/update', [TamuController::class, 'update'])->name('update-tamu');
+    Route::post('post-login',[LoginController::class, 'postLogin'])->name('post-login');
+    Route::post('/logout',[LoginController::class,'logout'])->name('get-logout');
 
+Route::get('/', [WelcomeController::class, 'index'])->name('get-admin');
 // admin
-    Route::get('/', [WelcomeController::class, 'index']);
+Route::group(['middleware' => ['auth:user','checkRole:admin']],function() {
     Route::get('/admin', [DashboardAdminController::class, 'index']);
     Route::get('/admin-tamu', [TamuController::class, 'index'])->name('get-tamu');
     Route::get('/admin-staf', [StafController::class, 'index'])->name('get-staf');
@@ -46,3 +44,14 @@ use App\Http\Controllers\ReservasiController;
     Route::delete('/admin-kamar/{id}', [KamarController::class, 'destroy'])->name('delete-kamar');
 
     Route::get('/admin-reservasi', [ReservasiController::class, 'index'])->name('get-reservasi');
+
+    // tamu-admin
+    Route::post('save-tamu',[TamuController::class, 'registrasiAkunTamu'])->name('save-tamu');
+    Route::delete('/admin-tamu/{id}', [TamuController::class, 'destroy'])->name('delete-tamu');
+    Route::put('/admin-tamu/{id}/update', [TamuController::class, 'update'])->name('update-tamu');
+});  
+    
+// tamu
+Route::group(['middleware' => ['auth:tamu','checkRole:tamu']],function() {
+    Route::get('/home-tamu',[TamuController::class, 'getHomeTamu'])->name('get-home-tamu');
+});

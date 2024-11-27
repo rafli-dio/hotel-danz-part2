@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id(); 
             $table->string('nama_tipe_kamar'); 
             $table->decimal('harga_kamar', 10, 2); 
-            $table->text('deskripsi_kamar'); 
+            $table->text('deskripsi_kamar');
+            $table->enum('kapasitas_kamar',[2,4,6,]); 
             $table->string('gambar_kamar'); 
             $table->timestamps();
         });

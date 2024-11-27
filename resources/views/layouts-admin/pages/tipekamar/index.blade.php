@@ -21,6 +21,14 @@
             <textarea class="form-control" id="deskripsi_kamar" name="deskripsi_kamar" rows="3" required></textarea>
           </div>
           <div class="mb-3">
+            <label for="kapasitas_kamar" class="form-label">Kapasitas Kamar</label>
+            <select class="form-control" id="kapasitas_kamar" name="kapasitas_kamar" required>
+              <option value="2">2 Orang</option>
+              <option value="4">4 Orang</option>
+              <option value="6">6 Orang</option>
+            </select>
+          </div>
+          <div class="mb-3">
             <label for="gambar_kamar" class="form-label">Gambar Kamar</label>
             <input type="file" class="form-control" id="gambar_kamar" name="gambar_kamar" required>
           </div>
@@ -58,6 +66,14 @@
           <div class="mb-3">
             <label for="deskripsi_kamar" class="form-label">Deskripsi Kamar</label>
             <textarea class="form-control" id="deskripsi_kamar" name="deskripsi_kamar" rows="3" required>{{ $tipe->deskripsi_kamar }}</textarea>
+          </div>
+          <div class="mb-3">
+            <label for="kapasitas_kamar" class="form-label">Kapasitas Kamar</label>
+            <select class="form-control" id="kapasitas_kamar" name="kapasitas_kamar" required>
+              <option value="2" {{ $tipe->kapasitas_kamar == 2 ? 'selected' : '' }}>2 Orang</option>
+              <option value="4" {{ $tipe->kapasitas_kamar == 4 ? 'selected' : '' }}>4 Orang</option>
+              <option value="6" {{ $tipe->kapasitas_kamar == 6 ? 'selected' : '' }}>6 Orang</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="gambar_kamar" class="form-label">Gambar Kamar</label>
@@ -98,6 +114,7 @@
                     <th>Nama Tipe Kamar</th>
                     <th>Harga Kamar</th>
                     <th>Deskripsi Kamar</th>
+                    <th>Kapasitas Kamar</th>
                     <th>Gambar Kamar</th>
                     <th style="text-align:center">Aksi</th>
                 </tr>
@@ -109,6 +126,7 @@
                     <td>{{ $tipe->nama_tipe_kamar }}</td>
                     <td>{{ number_format($tipe->harga_kamar, 0, ',', '.') }}</td>
                     <td>{{ $tipe->deskripsi_kamar }}</td>
+                    <td>{{ $tipe->kapasitas_kamar }}</td>
                     <td>
                         <img src="{{ asset('storage/' . $tipe->gambar_kamar) }}" alt="Gambar Kamar" class="img-thumbnail" style="width: 100px;">
                     </td>

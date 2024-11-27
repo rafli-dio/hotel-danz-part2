@@ -30,6 +30,7 @@ class TipeKamarController extends Controller
             'nama_tipe_kamar' => 'required|string|max:255',
             'harga_kamar' => 'required|numeric',
             'deskripsi_kamar' => 'required|string',
+            'kapasitas_kamar' => 'required',
             'gambar_kamar' => 'required|image|mimes:jpg,png,jpeg|max:2048',
         ]);
     
@@ -39,6 +40,7 @@ class TipeKamarController extends Controller
             'nama_tipe_kamar' => $request->nama_tipe_kamar,
             'harga_kamar' => $request->harga_kamar,
             'deskripsi_kamar' => $request->deskripsi_kamar,
+            'kapasitas_kamar' => $request->kapasitas_kamar,
             'gambar_kamar' => $gambarPath,
         ]);
     
@@ -70,6 +72,7 @@ class TipeKamarController extends Controller
             'nama_tipe_kamar' => 'required|string|max:255',
             'harga_kamar' => 'required|numeric',
             'deskripsi_kamar' => 'required|string',
+            'kapasitas_kamar' => 'required|in:2,4,6',
             'gambar_kamar' => 'nullable|image|mimes:jpg,png,jpeg|max:2048',
         ]);
 
@@ -78,6 +81,7 @@ class TipeKamarController extends Controller
         $tipekamar->nama_tipe_kamar = $request->nama_tipe_kamar;
         $tipekamar->harga_kamar = $request->harga_kamar;
         $tipekamar->deskripsi_kamar = $request->deskripsi_kamar;
+        $tipekamar->kapasitas_kamar = $request->kapasitas_kamar;
 
         if ($request->hasFile('gambar_kamar')) {
             if ($tipekamar->gambar_kamar && file_exists(storage_path('app/public/' . $tipekamar->gambar_kamar))) {

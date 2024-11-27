@@ -14,6 +14,7 @@ class TipeKamar extends Model
         'nama_tipe_kamar',
         'harga_kamar',
         'deskripsi_kamar',
+        'kapasitas_kamar',
         'gambar_kamar',
     ];
 

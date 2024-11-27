@@ -119,6 +119,7 @@
         </form>
     </div>
 </body>
+
 <script>
     function togglePassword(fieldId, iconElement) {
         const input = document.getElementById(fieldId);

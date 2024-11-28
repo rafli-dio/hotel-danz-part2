@@ -101,7 +101,8 @@
                 <tr>
                     <th>No</th>
                     <th>No Kamarr</th>
-                    <th>Tipe Kamarr</th>
+                    <th>Tipe Kamar</th>
+                    <th>Harga Kamar</th>
                     <th>Status</th>
                     <th style="text-align:center">Aksi</th>
                 </tr>
@@ -112,6 +113,7 @@
                     <td>{{ $index + 1 }}</td>
                     <td>{{ $kamars->nomor_kamar }}</td>
                     <td>{{ $kamars->tipekamar->nama_tipe_kamar}}</td>
+                    <td> Rp. {{ number_format($kamars->tipekamar->harga_kamar, 0, ',', '.') }}</td>
                     <td>
                         @if($kamars->status_tersedia)
                             <span class="badge badge-success" style="width:150px">

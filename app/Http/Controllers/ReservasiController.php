@@ -1,7 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Validator;
+use App\Models\Kamar;
+use App\Models\Reservasi;
+use App\Models\Tamu;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ReservasiController extends Controller
@@ -13,7 +17,10 @@ class ReservasiController extends Controller
      */
     public function index()
     {
-        return view('layouts-admin.pages.reservasi.index');
+        $kamar = Kamar::all();
+        $tamu = Tamu::all();
+        $reservasi = Reservasi::with('kamar','tamu')->get();
+        return view('layouts-admin.pages.reservasi.index', compact('kamar','reservasi','tamu'));
     }
 
     /**
@@ -34,7 +41,40 @@ class ReservasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'tamu_id' => 'required|exists:tamus,id',
+            'kamar_id' => 'required|exists:kamars,id',
+            'kota' => 'required|in:Jakarta,Surabaya,Solo,Bandung',
+            'tanggal_check_in' => 'required|date|before:tanggal_check_out',
+            'tanggal_check_out' => 'required|date|after:tanggal_check_in',
+            'jumlah_orang' => 'required|in:1,2,4,6',
+        ]);
+    
+        $checkIn = Carbon::parse($request->tanggal_check_in);
+        $checkOut = Carbon::parse($request->tanggal_check_out);
+        $days = $checkIn->diffInDays($checkOut);
+        
+        $kamar = Kamar::find($request->kamar_id);
+        if (!$kamar || !$kamar->tipeKamar) {
+            return redirect()->back()->withErrors(['error' => 'Data kamar atau tipe kamar tidak ditemukan.']);
+        }
+        $hargaKamar = $kamar->tipeKamar->harga_kamar;
+    
+        // Kalkulasi total harga
+        $totalHarga = $days * $hargaKamar;
+
+        // Simpan ke database
+        Reservasi::create([
+            'tamu_id' => $request->tamu_id,
+            'kamar_id' => $request->kamar_id,
+            'kota' => $request->kota,
+            'tanggal_check_in' => $request->tanggal_check_in,
+            'tanggal_check_out' => $request->tanggal_check_out,
+            'jumlah_orang' => $request->jumlah_orang,
+            'total_harga' => $totalHarga,
+        ]);
+    
+        return redirect()->route('get-reservasi');
     }
 
     /**
@@ -68,8 +108,46 @@ class ReservasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Validasi data input
+        $request->validate([
+            'tamu_id' => 'required|exists:tamus,id', 
+            'kamar_id' => 'required|exists:kamars,id', 
+            'kota' => 'required|in:Jakarta,Surabaya,Solo,Bandung', 
+            'tanggal_check_in' => 'required|date|after_or_equal:today', 
+            'tanggal_check_out' => 'required|date|after:tanggal_check_in',
+            'jumlah_orang' => 'required|in:1,2,4,6', 
+        ]);
+    
+        // Cari data reservasi
+        $reservasi = Reservasi::findOrFail($id);
+    
+        // Hitung jumlah hari
+        $checkIn = Carbon::parse($request->tanggal_check_in);
+        $checkOut = Carbon::parse($request->tanggal_check_out);
+        $days = $checkIn->diffInDays($checkOut);
+    
+        // Ambil harga kamar dari tipe kamar
+        $kamar = Kamar::find($request->kamar_id);
+        $hargaKamar = $kamar->tipeKamar->harga_kamar;
+    
+        // Kalkulasi total harga
+        $totalHarga = $days * $hargaKamar;
+    
+        // Update data
+        $reservasi->update([
+            'tamu_id' => $request->tamu_id,
+            'kamar_id' => $request->kamar_id,
+            'kota' => $request->kota,
+            'tanggal_check_in' => $request->tanggal_check_in,
+            'tanggal_check_out' => $request->tanggal_check_out,
+            'jumlah_orang' => $request->jumlah_orang,
+            'total_harga' => $totalHarga,
+        ]);
+    
+        return redirect()->route('get-reservasi');
     }
+    
+
 
     /**
      * Remove the specified resource from storage.
@@ -79,6 +157,8 @@ class ReservasiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $reservasi = Reservasi::findOrFail($id);
+        $reservasi->delete();
+        return redirect()->route('get-reservasi');
     }
 }

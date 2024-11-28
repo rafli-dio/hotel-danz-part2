@@ -75,6 +75,95 @@
   </div>
 </div>
 
+<!-- update reservasi -->
+@foreach($reservasi as $reservasis)
+
+<div class="modal fade" id="editReservasiModal{{ $reservasis->id }}" tabindex="-1" aria-labelledby="editReservasiModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editReservasiModalLabel">Edit Reservasi Kamar</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="{{ route('update-reservasi', $reservasis->id) }}" method="POST" enctype="multipart/form-data">
+          @csrf
+          @method('PUT')
+          <!-- tamu -->
+          <div class="mb-3">
+    <label for="tamu_id" class="form-label">Tamu</label>
+    <select class="form-control" id="tamu_id" name="tamu_id" required>
+        <option value="" disabled selected>Pilih Tamu</option>
+        @foreach($tamu as $tamus)
+            <option value="{{ $tamus->id }}" 
+                {{ old('tamu_id', $reservasis->tamu_id ?? '') == $tamus->id ? 'selected' : '' }}>
+                {{ $tamus->nama_panjang }}
+            </option>
+        @endforeach
+    </select>
+</div>
+
+<!-- Dropdown Kamar -->
+<div class="mb-3">
+    <label for="kamar_id" class="form-label">Kamar</label>
+    <select class="form-control" id="kamar_id" name="kamar_id" required>
+        <option value="" disabled selected>Pilih Kamar</option>
+        @foreach($kamar as $kamars)
+            <option value="{{ $kamars->id }}" 
+                {{ old('kamar_id', $reservasis->kamar_id ?? '') == $kamars->id ? 'selected' : '' }}>
+                {{ $kamars->nomor_kamar }}
+            </option>
+        @endforeach
+    </select>
+</div>
+          <!-- kota -->
+          <div class="mb-3">
+            <label for="kota" class="form-label">Kapasitas Kamar</label>
+            <select class="form-control" id="kota" name="kota" required>
+              <option value="Jakarta" {{ $reservasis->kota == "Jakarta" ? 'selected' : '' }}>Jakarta</option>
+              <option value="Surabaya" {{ $reservasis->kota == "Surabaya" ? 'selected' : '' }}>Surabaya</option>
+              <option value="Solo" {{ $reservasis->kota == "Solo" ? 'selected' : '' }}>Solo</option>
+              <option value="Bandung" {{ $reservasis->kota == "Bandung" ? 'selected' : '' }}>Bandung</option>
+            </select>
+          </div>
+          <!-- tanggal check in -->
+          <div class="mb-3">
+            <label for="tanggal_check_in" class="form-label">Tanggal Check-In</label>
+            <input type="date" class="form-control" id="tanggal_check_in" name="tanggal_check_in" 
+              value="{{ $reservasis->tanggal_check_in }}" required>
+          </div>
+          <!-- tanggal check out -->
+          <div class="mb-3">
+            <label for="tanggal_check_out" class="form-label">Tanggal Check-Out</label>
+            <input type="date" class="form-control" id="tanggal_check_out" name="tanggal_check_out" 
+              value="{{ $reservasis->tanggal_check_out }}" required>
+          </div>
+          <!-- jumlah orang -->
+          <div class="mb-3">
+            <label for="jumlah_orang" class="form-label">Jumlah Orang</label>
+            <select class="form-control" id="jumlah_orang" name="jumlah_orang" required>
+              <option value="1" {{ $reservasis->jumlah_orang == 1 ? 'selected' : '' }}>1 Orang</option>
+              <option value="2" {{ $reservasis->jumlah_orang == 2 ? 'selected' : '' }}>2 Orang</option>
+              <option value="4" {{ $reservasis->jumlah_orang == 4 ? 'selected' : '' }}>4 Orang</option>
+              <option value="6" {{ $reservasis->jumlah_orang == 6 ? 'selected' : '' }}>6 Orang</option>
+            </select>
+          </div>
+          <!-- total harga -->
+          <div class="mb-3">
+            <label for="total_harga" class="form-label">Total Harga</label>
+            <input type="text" class="form-control" id="total_harga" name="total_harga" 
+              value="{{ $reservasis->total_harga }}" readonly>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+            <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
 
 @extends('components-admin.app')
 @section('title','Reservasi')
@@ -112,15 +201,15 @@
                     <td>{{ $reservasis->tanggal_check_in}}</td>
                     <td>{{ $reservasis->tanggal_check_out}}</td>
                     <td>{{ $reservasis->jumlah_orang }}</td>
-                    <td>Rp. {{ number_format($reservasis->kamar->tipekamar->harga_kamar, 0, ',', '.') }}</td>
+                    <td>Rp. {{ number_format($reservasis->total_harga, 0, ',', '.') }}</td>
                     <td style="text-align:center">
-                        <button class="btn btn-warning" style="width:100px" data-toggle="modal" data-target="#editTamuModal">
+                        <button class="btn btn-warning" style="width:100px" data-toggle="modal" data-target="#editReservasiModal{{ $reservasis->id }}">
                             <i class="far fa-edit mr-3"></i>Edit
                         </button>
-                        <form action="" method="POST" class="d-inline">
+                        <form action="{{route('delete-reservasi', $reservasis->id)}}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button class="btn btn-danger" style="width:100px" onclick="return confirm('Apakah Anda yakin ingin menghapus tipe kamar ini?')">
+                            <button class="btn btn-danger" style="width:100px" onclick="return confirm('Apakah Anda yakin ingin menghapus reservasi kamar ini?')">
                                 <i class="far fa-trash-alt mr-2"></i>Hapus
                             </button>
                         </form>

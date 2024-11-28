@@ -44,7 +44,11 @@ Route::group(['middleware' => ['auth:user','checkRole:admin']],function() {
     Route::put('/admin-kamar/{id}/update', [KamarController::class, 'update'])->name('update-kamar');
     Route::delete('/admin-kamar/{id}', [KamarController::class, 'destroy'])->name('delete-kamar');
 
+    // reservasi
     Route::get('/admin-reservasi', [ReservasiController::class, 'index'])->name('get-reservasi');
+    Route::post('save-reservasi',[ReservasiController::class, 'store'])->name('save-reservasi');
+    Route::delete('/admin-reservasi/{id}', [ReservasiController::class, 'destroy'])->name('delete-reservasi');
+    Route::put('/admin-reservasi/{id}/update', [ReservasiController::class, 'update'])->name('update-reservasi');
 
     // tamu-admin
     Route::delete('/admin-tamu/{id}', [TamuController::class, 'destroy'])->name('delete-tamu');

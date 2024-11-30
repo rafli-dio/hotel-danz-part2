@@ -254,7 +254,6 @@
       }
     }
 
-    // Tambahkan event listener
     tanggalCheckIn.addEventListener('change', calculateTotal);
     tanggalCheckOut.addEventListener('change', calculateTotal);
     kamarSelect.addEventListener('change', calculateTotal);

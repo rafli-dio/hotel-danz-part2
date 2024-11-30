@@ -17,7 +17,7 @@ class ReservasiController extends Controller
      */
     public function index()
     {
-        $kamar = Kamar::all();
+        $kamar = Kamar::where('status_tersedia', true)->get();
         $tamu = Tamu::all();
         $reservasi = Reservasi::with('kamar','tamu')->get();
         return view('layouts-admin.pages.reservasi.index', compact('kamar','reservasi','tamu'));

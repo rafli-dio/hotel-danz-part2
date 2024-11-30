@@ -239,21 +239,18 @@
       const checkInDate = new Date(tanggalCheckIn.value);
       const checkOutDate = new Date(tanggalCheckOut.value);
 
-      // Pastikan tanggal valid
       if (!isNaN(checkInDate) && !isNaN(checkOutDate) && checkOutDate > checkInDate) {
         const diffTime = Math.abs(checkOutDate - checkInDate);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); // Konversi ke hari
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
 
-        // Ambil harga kamar dari opsi yang dipilih
         const selectedOption = kamarSelect.options[kamarSelect.selectedIndex];
         const hargaKamar = parseFloat(selectedOption.getAttribute('data-harga'));
 
-        // Hitung total harga
         if (!isNaN(hargaKamar)) {
           totalHarga.value = diffDays * hargaKamar;
         }
       } else {
-        totalHarga.value = ''; // Kosongkan jika tanggal tidak valid
+        totalHarga.value = ''; 
       }
     }
 

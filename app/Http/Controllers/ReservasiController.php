@@ -73,6 +73,10 @@ class ReservasiController extends Controller
             'jumlah_orang' => $request->jumlah_orang,
             'total_harga' => $totalHarga,
         ]);
+
+        $kamar->update([
+            'status_tersedia' => false, 
+        ]);
     
         return redirect()->route('get-reservasi');
     }
@@ -108,7 +112,6 @@ class ReservasiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // Validasi data input
         $request->validate([
             'tamu_id' => 'required|exists:tamus,id', 
             'kamar_id' => 'required|exists:kamars,id', 
@@ -118,22 +121,17 @@ class ReservasiController extends Controller
             'jumlah_orang' => 'required|in:1,2,4,6', 
         ]);
     
-        // Cari data reservasi
         $reservasi = Reservasi::findOrFail($id);
     
-        // Hitung jumlah hari
         $checkIn = Carbon::parse($request->tanggal_check_in);
         $checkOut = Carbon::parse($request->tanggal_check_out);
         $days = $checkIn->diffInDays($checkOut);
     
-        // Ambil harga kamar dari tipe kamar
         $kamar = Kamar::find($request->kamar_id);
         $hargaKamar = $kamar->tipeKamar->harga_kamar;
     
-        // Kalkulasi total harga
         $totalHarga = $days * $hargaKamar;
     
-        // Update data
         $reservasi->update([
             'tamu_id' => $request->tamu_id,
             'kamar_id' => $request->kamar_id,
@@ -158,7 +156,16 @@ class ReservasiController extends Controller
     public function destroy($id)
     {
         $reservasi = Reservasi::findOrFail($id);
+
+        $kamar = $reservasi->kamar;
+        if ($kamar) {
+            $kamar->update([
+                'status_tersedia' => true, 
+            ]);
+        }
+
         $reservasi->delete();
+
         return redirect()->route('get-reservasi');
     }
 }

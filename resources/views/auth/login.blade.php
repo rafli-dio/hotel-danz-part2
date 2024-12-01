@@ -50,16 +50,6 @@
                         required 
                     />
                 </div>
-                <div class="flex items-center justify-between">
-                    <label class="flex items-center">
-                        <input 
-                            type="checkbox" 
-                            class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
-                        />
-                        <span class="ml-2 text-sm text-gray-600">Remember me</span>
-                    </label>
-                    <a href="#" class="text-sm text-blue-600 hover:underline">Forgot password?</a>
-                </div>
                 <button 
                     type="submit" 
                     class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition"

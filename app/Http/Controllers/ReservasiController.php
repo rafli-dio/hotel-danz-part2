@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Models\Kamar;
 use App\Models\Reservasi;
 use App\Models\Tamu;
+use App\Models\TipeKamar;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -22,6 +23,16 @@ class ReservasiController extends Controller
         $reservasi = Reservasi::with('kamar','tamu')->get();
         return view('layouts-admin.pages.reservasi.index', compact('kamar','reservasi','tamu'));
     }
+
+    public function formBooking($tipe_kamar)
+{
+    $tipe = TipeKamar::findOrFail($tipe_kamar);
+    $kamar = Kamar::where('tipe_kamar_id', $tipe_kamar)->where('status_tersedia', true)->get();
+    $tamu = auth('tamu')->user();
+
+    return view('layouts-user.pages.rooms.reservasi', compact('tipe', 'kamar', 'tamu'));
+}
+
 
     /**
      * Show the form for creating a new resource.

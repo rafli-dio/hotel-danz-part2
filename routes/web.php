@@ -58,4 +58,5 @@ Route::group(['middleware' => ['auth:user','checkRole:admin']],function() {
 // tamu
 Route::group(['middleware' => ['auth:tamu','checkRole:tamu']],function() {
     Route::get('/home-tamu',[TamuController::class, 'getHomeTamu'])->name('get-home-tamu');
+    Route::get('/form-booking/{tipe_kamar}', [ReservasiController::class, 'formBooking'])->name('form-booking');
 });

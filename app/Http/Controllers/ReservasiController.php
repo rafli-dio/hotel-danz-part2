@@ -18,20 +18,22 @@ class ReservasiController extends Controller
      */
     public function index()
     {
-        $kamar = Kamar::where('status_tersedia', true)->get();
+        $kamar = Kamar::with('tipeKamar')->where('status_tersedia', true)->get();
         $tamu = Tamu::all();
-        $reservasi = Reservasi::with('kamar','tamu')->get();
-        return view('layouts-admin.pages.reservasi.index', compact('kamar','reservasi','tamu'));
+        $reservasi = Reservasi::with('kamar', 'tamu')->get();
+    
+        return view('layouts-admin.pages.reservasi.index', compact('kamar', 'reservasi', 'tamu'));
     }
+    
 
     public function formBooking($tipe_kamar)
-{
-    $tipe = TipeKamar::findOrFail($tipe_kamar);
-    $kamar = Kamar::where('tipe_kamar_id', $tipe_kamar)->where('status_tersedia', true)->get();
-    $tamu = auth('tamu')->user();
+    {
+        $tipe = TipeKamar::findOrFail($tipe_kamar);
+        $kamar = Kamar::where('tipe_kamar_id', $tipe_kamar)->where('status_tersedia', true)->get();
+        $tamu = auth('tamu')->user();
 
-    return view('layouts-user.pages.rooms.reservasi', compact('tipe', 'kamar', 'tamu'));
-}
+        return view('layouts-user.pages.rooms.reservasi', compact('tipe', 'kamar', 'tamu'));
+    }
 
 
     /**

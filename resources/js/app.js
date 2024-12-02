@@ -60,10 +60,8 @@ const nextButtonRoom = document.getElementById("next-room");
 let currentIndexRoom = 0;
 
 prevButtonRoom.addEventListener("click", () => {
-    // Menghindari index negatif
     currentIndexRoom = Math.max(0, currentIndexRoom - 1);
     sliderRoom.style.transform = `translateX(-${currentIndexRoom * 29}%)`;
-    // 29% karena mempertimbangkan gap antar elemen
 });
 
 nextButtonRoom.addEventListener("click", () => {
@@ -71,7 +69,6 @@ nextButtonRoom.addEventListener("click", () => {
     const visibleCardsRoom = 4;
     const maxIndexRoom = totalCardsRoom - visibleCardsRoom;
 
-    // Mencegah melampaui jumlah kartu
     currentIndexRoom = Math.min(maxIndexRoom, currentIndexRoom + 1);
     sliderRoom.style.transform = `translateX(-${currentIndexRoom * 29}%)`;
 });

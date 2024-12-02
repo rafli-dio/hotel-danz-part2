@@ -96,31 +96,43 @@
           @method('PUT')
           <!-- tamu -->
           <div class="mb-3">
-    <label for="tamu_id" class="form-label">Tamu</label>
-    <select class="form-control" id="tamu_id" name="tamu_id" required>
-        <option value="" disabled selected>Pilih Tamu</option>
-        @foreach($tamu as $tamus)
-            <option value="{{ $tamus->id }}" 
-                {{ old('tamu_id', $reservasis->tamu_id ?? '') == $tamus->id ? 'selected' : '' }}>
-                {{ $tamus->nama_panjang }}
-            </option>
-        @endforeach
-    </select>
-</div>
+            <label for="tamu_id" class="form-label">Tamu</label>
+            <select class="form-control" id="tamu_id" name="tamu_id" required>
+                <option value="" disabled selected>Pilih Tamu</option>
+                @foreach($tamu as $tamus)
+                    <option value="{{ $tamus->id }}" 
+                        {{ old('tamu_id', $reservasis->tamu_id ?? '') == $tamus->id ? 'selected' : '' }}>
+                        {{ $tamus->nama_panjang }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+          <!-- Jumlah Orang -->
+          <div class="mb-3">
+              <label for="jumlah_orang" class="form-label">Jumlah Orang</label>
+              <select class="form-control" id="jumlah_orang_update" name="jumlah_orang" required>
+                  <option value="1" {{ $reservasis->jumlah_orang == 1 ? 'selected' : '' }}>1 Orang</option>
+                  <option value="2" {{ $reservasis->jumlah_orang == 2 ? 'selected' : '' }}>2 Orang</option>
+                  <option value="4" {{ $reservasis->jumlah_orang == 4 ? 'selected' : '' }}>4 Orang</option>
+                  <option value="6" {{ $reservasis->jumlah_orang == 6 ? 'selected' : '' }}>6 Orang</option>
+              </select>
+          </div>
 
-  <!-- Dropdown Kamar -->
-  <div class="mb-3">
-      <label for="kamar_id" class="form-label">Kamar</label>
-      <select class="form-control" id="kamar_id" name="kamar_id" required>
-          <option value="" disabled selected>Pilih Kamar</option>
-          @foreach($kamar as $kamars)
-              <option value="{{ $kamars->id }}" 
-                  {{ old('kamar_id', $reservasis->kamar_id ?? '') == $kamars->id ? 'selected' : '' }}>
-                  {{ $kamars->nomor_kamar }}
-              </option>
-          @endforeach
-      </select>
-  </div>
+          <!-- Kamar -->
+          <div class="mb-3">
+              <label for="kamar_id" class="form-label">Kamar</label>
+              <select class="form-control" id="kamar_id_update" name="kamar_id" required>
+                  <option value="" disabled>Pilih Kamar Hotel</option>
+                  @foreach($kamar as $kamars)
+                      <option value="{{ $kamars->id }}" 
+                              data-kapasitas="{{ $kamars->tipeKamar->kapasitas_kamar }}" 
+                              data-harga="{{ $kamars->tipeKamar->harga_kamar }}"
+                              {{ $reservasis->kamar_id == $kamars->id ? 'selected' : '' }}>
+                          {{ $kamars->nomor_kamar }} 
+                      </option>
+                  @endforeach
+              </select>
+          </div>
           <!-- kota -->
           <div class="mb-3">
             <label for="kota" class="form-label">Kapasitas Kamar</label>
@@ -143,16 +155,7 @@
             <input type="date" class="form-control" id="tanggal_check_out" name="tanggal_check_out" 
               value="{{ $reservasis->tanggal_check_out }}" required>
           </div>
-          <!-- jumlah orang -->
-          <div class="mb-3">
-            <label for="jumlah_orang" class="form-label">Jumlah Orang</label>
-            <select class="form-control" id="jumlah_orang" name="jumlah_orang" required>
-              <option value="1" {{ $reservasis->jumlah_orang == 1 ? 'selected' : '' }}>1 Orang</option>
-              <option value="2" {{ $reservasis->jumlah_orang == 2 ? 'selected' : '' }}>2 Orang</option>
-              <option value="4" {{ $reservasis->jumlah_orang == 4 ? 'selected' : '' }}>4 Orang</option>
-              <option value="6" {{ $reservasis->jumlah_orang == 6 ? 'selected' : '' }}>6 Orang</option>
-            </select>
-          </div>
+ 
           <!-- total harga -->
           <div class="mb-3">
             <label for="total_harga" class="form-label">Total Harga</label>
@@ -233,6 +236,7 @@
   </div>
 </div>
 @endsection
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const tanggalCheckIn = document.getElementById('tanggal_check_in');
@@ -263,6 +267,8 @@
     tanggalCheckOut.addEventListener('change', calculateTotal);
     kamarSelect.addEventListener('change', calculateTotal);
   });
+
+  // create 
   document.getElementById('jumlah_orang').addEventListener('change', function () {
         const jumlahOrang = parseInt(this.value); 
         const kamarOptions = document.querySelectorAll('#kamar_id option'); 
@@ -277,8 +283,24 @@
                 }
             }
         });
+        document.getElementById('kamar_id').value = '';
+    });
 
-        // Reset pilihan kamar ke default
+  // update 
+  document.getElementById('jumlah_orang_update').addEventListener('change', function () {
+        const jumlahOrang = parseInt(this.value); 
+        const kamarOptions = document.querySelectorAll('#kamar_id_update option'); 
+
+        kamarOptions.forEach(option => {
+            const kapasitasKamar = parseInt(option.getAttribute('data-kapasitas')); 
+            if (!isNaN(kapasitasKamar)) {
+                if (kapasitasKamar >= jumlahOrang) {
+                    option.style.display = ''; 
+                } else {
+                    option.style.display = 'none'; 
+                }
+            }
+        });
         document.getElementById('kamar_id').value = '';
     });
 

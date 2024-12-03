@@ -24,7 +24,7 @@
             <div id="navbar" class="hidden w-full md:flex md:w-auto">
                 <ul class="flex flex-col font-medium mt-4 md:mt-0 md:flex-row md:space-x-8">
                     <li>
-                        <a href="#" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:hover:text-yellow-500">Home</a>
+                        <a href="{{route('get-home-tamu')}}" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:hover:text-yellow-500">Home</a>
                     </li>
                     <li>
                         <a href="#" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:hover:text-yellow-500">About</a>

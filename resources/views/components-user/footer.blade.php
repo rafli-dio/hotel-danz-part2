@@ -39,7 +39,7 @@
                     placeholder="Your email address"
                     class="p-2 rounded-l-lg focus:outline-none text-black"
                 />
-                <button class="bg-[#2B2D21] text-white p-2 rounded-r-lg hover:bg-blue-600">
+                <button class="bg-blue-600 text-white p-2 rounded-r-lg hover:bg-blue-600">
                     Subscribe
                 </button>
             </div>

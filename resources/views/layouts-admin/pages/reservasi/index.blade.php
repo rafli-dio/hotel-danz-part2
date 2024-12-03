@@ -238,6 +238,7 @@
 @endsection
 
 <script>
+
   document.addEventListener('DOMContentLoaded', function () {
     const tanggalCheckIn = document.getElementById('tanggal_check_in');
     const tanggalCheckOut = document.getElementById('tanggal_check_out');
@@ -256,7 +257,7 @@
         const hargaKamar = parseFloat(selectedOption.getAttribute('data-harga'));
 
         if (!isNaN(hargaKamar)) {
-          totalHarga.value = diffDays * hargaKamar;
+          totalHarga.value = `Rp. ${diffDays * hargaKamar}`;
         }
       } else {
         totalHarga.value = ''; 

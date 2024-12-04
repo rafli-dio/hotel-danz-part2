@@ -9,7 +9,7 @@ use App\Models\TipeKamar;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Auth;
-
+use Picqer\Barcode\BarcodeGeneratorHTML;
 
 class ReservasiController extends Controller
 {
@@ -37,23 +37,6 @@ class ReservasiController extends Controller
         return view('layouts-user.pages.rooms.reservasi', compact('tipe', 'kamar', 'tamu'));
     }
 
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $validatedData = $request->validate([
@@ -75,10 +58,8 @@ class ReservasiController extends Controller
         }
         $hargaKamar = $kamar->tipeKamar->harga_kamar;
     
-        // Kalkulasi total harga
         $totalHarga = $days * $hargaKamar;
 
-        // Simpan ke database
         Reservasi::create([
             'tamu_id' => $request->tamu_id,
             'kamar_id' => $request->kamar_id,
@@ -100,6 +81,15 @@ class ReservasiController extends Controller
         return redirect()->route('get-reservasi');
     }
 
+    public function showInvoice($id)
+    {
+        $reservasi = Reservasi::with(['tamu', 'kamar.tipeKamar'])->findOrFail($id);
+
+        $generator = new BarcodeGeneratorHTML();
+        $barcode = $generator->getBarcode($reservasi->id, $generator::TYPE_CODE_128);
+    
+        return view('layouts-user.pages.rooms.invoice', compact('reservasi', 'barcode'));
+    }
 
     public function storeBokingTamu(Request $request)
     {
@@ -122,11 +112,9 @@ class ReservasiController extends Controller
         }
         $hargaKamar = $kamar->tipeKamar->harga_kamar;
     
-        // Kalkulasi total harga
         $totalHarga = $days * $hargaKamar;
 
-        // Simpan ke database
-        Reservasi::create([
+        $reservasi = Reservasi::create([
             'tamu_id' => $request->tamu_id,
             'kamar_id' => $request->kamar_id,
             'kota' => $request->kota,
@@ -144,8 +132,7 @@ class ReservasiController extends Controller
             'status_tersedia' => false, 
         ]);
     
-        return redirect()->route('form-booking', ['tipe_kamar' => $kamar->tipeKamar->id]);
-
+        return redirect()->route('show-invoice', ['id' => $reservasi->id]);
     }
     /**
      * Display the specified resource.

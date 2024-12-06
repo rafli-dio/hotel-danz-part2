@@ -31,7 +31,12 @@ Route::get('/', [WelcomeController::class, 'index'])->name('get-admin');
 Route::group(['middleware' => ['auth:user','checkRole:admin']],function() {
     Route::get('/admin', [DashboardAdminController::class, 'index']);
     Route::get('/admin-tamu', [TamuController::class, 'index'])->name('get-tamu');
+
+    // staf
     Route::get('/admin-staf', [StafController::class, 'index'])->name('get-staf');
+    Route::post('save-staf', [StafController::class, 'store'])->name('save-staf');
+
+
 
     // tipe kamar
     Route::get('/admin-tipe-kamar', [TipeKamarController::class, 'index'])->name('get-tipe-kamar');

@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Auth;
+use App\Models\User;
 
 use Illuminate\Http\Request;
 
@@ -13,18 +15,10 @@ class StafController extends Controller
      */
     public function index()
     {
-        return view('layouts-admin.pages.staf.index');
+        $staf = User::where('role', 'staf')->get();
+        return view('layouts-admin.pages.staf.index', compact('staf'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -34,7 +28,20 @@ class StafController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        User::create([
+            "name" => $request->name,
+            "email" => $request->email,
+            'role' => 'staf',
+            "password" => bcrypt($request->password),
+        ]);
+
+        return redirect()->route('get-staf');
     }
 
     /**

@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth:user','checkRole:admin']],function() {
     // staf
     Route::get('/admin-staf', [StafController::class, 'index'])->name('get-staf');
     Route::post('save-staf', [StafController::class, 'store'])->name('save-staf');
+    Route::put('/admin-staf/{id}/update', [StafController::class, 'update'])->name('update-staf');
+    Route::delete('/admin-staf/{id}', [StafController::class, 'destroy'])->name('delete-staf');
 
 
 

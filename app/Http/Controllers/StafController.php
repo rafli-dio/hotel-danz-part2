@@ -75,8 +75,23 @@ class StafController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,' . $id, 
+            'password' => 'nullable|string|min:8|confirmed', 
+        ]);
+    
+        $user = User::findOrFail($id);
+    
+        $user->update([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => $request->password ? bcrypt($validatedData['password']) : $user->password, 
+        ]);
+    
+        return redirect()->route('get-staf');
     }
+    
 
     /**
      * Remove the specified resource from storage.
@@ -86,6 +101,8 @@ class StafController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('get-staf');
     }
 }

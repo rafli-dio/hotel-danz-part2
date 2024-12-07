@@ -19,6 +19,12 @@ class StafController extends Controller
         return view('layouts-admin.pages.staf.index', compact('staf'));
     }
 
+    public function indexStaf()
+    {
+        $staf = User::where('role', 'staf')->get();
+        return view('layouts-staf.index', compact('staf'));
+    }
+
 
     /**
      * Store a newly created resource in storage.

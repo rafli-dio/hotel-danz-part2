@@ -23,8 +23,13 @@ class LoginController extends Controller
         if(Auth::guard('tamu')->attempt(['email' => $request->email, 'password' => $request->password])){
             return redirect('/home-tamu');
         }
-        elseif((Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password]))){
-            return redirect ('/admin');
+        elseif (Auth::guard('user')->attempt(['email' => $request->email, 'password' => $request->password])) {
+            $user = Auth::guard('user')->user(); 
+            if ($user->role === 'admin') {
+                return redirect('/admin'); 
+            } elseif ($user->role === 'staf') {
+                return redirect('/staf'); 
+            }
         }
     }
 

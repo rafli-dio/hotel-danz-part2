@@ -174,6 +174,8 @@
 @endforeach
 
 @extends('components-admin.app')
+@section('title-header','Admin')
+@section('title-user','Admin')
 @section('title','Reservasi')
 @section('main')
 <div class="col-12 col-md-6 col-lg-12">

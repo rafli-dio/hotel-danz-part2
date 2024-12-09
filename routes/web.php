@@ -38,8 +38,6 @@ Route::group(['middleware' => ['auth:user','checkRole:admin']],function() {
     Route::put('/admin-staf/{id}/update', [StafController::class, 'update'])->name('update-staf');
     Route::delete('/admin-staf/{id}', [StafController::class, 'destroy'])->name('delete-staf');
 
-
-
     // tipe kamar
     Route::get('/admin-tipe-kamar', [TipeKamarController::class, 'index'])->name('get-tipe-kamar');
     Route::post('save-tipe-kamar',[TipeKamarController::class, 'store'])->name('save-tipe-kamar');
@@ -68,9 +66,13 @@ Route::group(['middleware' => ['auth:tamu','checkRole:tamu']],function() {
     Route::get('/form-booking/{tipe_kamar}', [ReservasiController::class, 'formBooking'])->name('form-booking');
     Route::post('save-reservasi-tamu',[ReservasiController::class, 'storeBokingTamu'])->name('save-reservasi-tamu');
     Route::get('/invoice/{id}', [ReservasiController::class, 'showInvoice'])->name('show-invoice');
-    
+
 });
 
 Route::group(['middleware' => ['auth:user','checkRole:staf']],function() {
     Route::get('/staf', [StafController::class, 'indexStaf'])->name('get-dashboard-staf');
+    Route::get('/staf-reservasi', [ReservasiController::class, 'index'])->name('get-reservasi-staf');
+    Route::post('save-reservasi',[ReservasiController::class, 'store'])->name('save-reservasi-staf');
+    Route::delete('/staf-reservasi/{id}', [ReservasiController::class, 'destroy'])->name('delete-reservasi-staf');
+    Route::put('/staf-reservasi/{id}/update', [ReservasiController::class, 'update'])->name('update-reservasi-staf');
 });

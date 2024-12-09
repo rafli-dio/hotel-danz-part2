@@ -68,6 +68,7 @@ Route::group(['middleware' => ['auth:tamu','checkRole:tamu']],function() {
     Route::get('/form-booking/{tipe_kamar}', [ReservasiController::class, 'formBooking'])->name('form-booking');
     Route::post('save-reservasi-tamu',[ReservasiController::class, 'storeBokingTamu'])->name('save-reservasi-tamu');
     Route::get('/invoice/{id}', [ReservasiController::class, 'showInvoice'])->name('show-invoice');
+    
 });
 
 Route::group(['middleware' => ['auth:user','checkRole:staf']],function() {

@@ -49,12 +49,6 @@ Route::group(['middleware' => ['auth:user','checkRole:admin']],function() {
     Route::put('/admin-kamar/{id}/update', [KamarController::class, 'update'])->name('update-kamar');
     Route::delete('/admin-kamar/{id}', [KamarController::class, 'destroy'])->name('delete-kamar');
 
-    // reservasi
-    Route::get('/admin-reservasi', [ReservasiController::class, 'index'])->name('get-reservasi');
-    Route::post('save-reservasi',[ReservasiController::class, 'store'])->name('save-reservasi');
-    Route::delete('/admin-reservasi/{id}', [ReservasiController::class, 'destroy'])->name('delete-reservasi');
-    Route::put('/admin-reservasi/{id}/update', [ReservasiController::class, 'update'])->name('update-reservasi');
-
     // tamu-admin
     Route::delete('/admin-tamu/{id}', [TamuController::class, 'destroy'])->name('delete-tamu');
     Route::put('/admin-tamu/{id}/update', [TamuController::class, 'update'])->name('update-tamu');
@@ -69,10 +63,11 @@ Route::group(['middleware' => ['auth:tamu','checkRole:tamu']],function() {
 
 });
 
-Route::group(['middleware' => ['auth:user','checkRole:staf']],function() {
+Route::group(['middleware' => ['auth:user', 'checkRole:admin,staf']], function() {
     Route::get('/staf', [StafController::class, 'indexStaf'])->name('get-dashboard-staf');
-    Route::get('/staf-reservasi', [ReservasiController::class, 'index'])->name('get-reservasi-staf');
-    Route::post('save-reservasi',[ReservasiController::class, 'store'])->name('save-reservasi-staf');
-    Route::delete('/staf-reservasi/{id}', [ReservasiController::class, 'destroy'])->name('delete-reservasi-staf');
-    Route::put('/staf-reservasi/{id}/update', [ReservasiController::class, 'update'])->name('update-reservasi-staf');
+    Route::get('/reservasi', [ReservasiController::class, 'index'])->name('get-reservasi');
+    Route::post('/reservasi/save', [ReservasiController::class, 'store'])->name('save-reservasi');
+    Route::delete('/reservasi/{id}', [ReservasiController::class, 'destroy'])->name('delete-reservasi');
+    Route::put('/reservasi/{id}/update', [ReservasiController::class, 'update'])->name('update-reservasi');
 });
+

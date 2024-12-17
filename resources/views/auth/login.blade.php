@@ -16,7 +16,7 @@
     <!-- Bagian Gambar -->
     <section class="image w-1/2 bg-gray-100 flex items-center justify-center">
         <img 
-            src="https://via.placeholder.com/500" 
+            src="{{ asset('assets/images/img-login-page.png') }}" 
             alt="Gambar Ilustrasi" 
             class="w-full h-auto object-cover"
         />

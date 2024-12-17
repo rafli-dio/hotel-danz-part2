@@ -9,14 +9,17 @@
     </div>
     <ul class="sidebar-menu">
       <li class="menu-header">Dashboard</li>
-      <li class="active">
-        <a class="nav-link" href="/admin/">
+    @if(auth()->user()->role == "admin" || auth()->user()->role == "staf")
+      <li class="{{ Request::is('dashboard') ? 'active' : '' }}">
+        <a class="nav-link" href="/dashboard">
           <i class="fas fa-home"></i> <span>Dashboard</span>
         </a>
       </li>
+      @endif
+
+      <li class="menu-header">Website</li>
       @if(auth()->user()->role == "admin")
-        <li class="menu-header">Website</li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown {{ Request::is('staf*', 'tamu*') ? 'active' : '' }}">
           <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-users"></i><span>Modul Pengguna</span>
           </a>
@@ -25,7 +28,7 @@
             <li><a class="nav-link" href="{{route('get-tamu')}}">Tamu</a></li>
           </ul>
         </li>
-        <li class="nav-item dropdown">
+        <li class="nav-item dropdown {{ Request::is('tipe-kamar*', 'kamar*') ? 'active' : '' }}">
           <a href="#" class="nav-link has-dropdown">
             <i class="fas fa-hotel"></i><span>Modul Hotel</span>
           </a>
@@ -36,7 +39,7 @@
         </li>
       @endif
       @if(auth()->user()->role == "admin" || auth()->user()->role == "staf")
-        <li>
+        <li class="{{ Request::is('reservasi') ? 'active' : '' }}">
           <a class="nav-link" href="{{ route('get-reservasi') }}">
             <i class="fas fa-clipboard"></i> <span>Reservasi</span>
           </a>

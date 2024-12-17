@@ -29,7 +29,7 @@ Route::post('/logout',[LoginController::class,'logout'])->name('get-logout');
 Route::get('/', [WelcomeController::class, 'index'])->name('get-admin');
 // admin
 Route::group(['middleware' => ['auth:user','checkRole:admin']],function() {
-    Route::get('/admin', [DashboardAdminController::class, 'index']);
+    Route::get('/dashboard', [DashboardAdminController::class, 'index']);
     Route::get('/admin-tamu', [TamuController::class, 'index'])->name('get-tamu');
 
     // staf
@@ -64,7 +64,7 @@ Route::group(['middleware' => ['auth:tamu','checkRole:tamu']],function() {
 });
 
 Route::group(['middleware' => ['auth:user', 'checkRole:admin,staf']], function() {
-    Route::get('/staf', [StafController::class, 'indexStaf'])->name('get-dashboard-staf');
+    Route::get('/dashboard', [DashboardAdminController::class, 'index']);
     Route::get('/reservasi', [ReservasiController::class, 'index'])->name('get-reservasi');
     Route::post('/reservasi/save', [ReservasiController::class, 'store'])->name('save-reservasi');
     Route::delete('/reservasi/{id}', [ReservasiController::class, 'destroy'])->name('delete-reservasi');

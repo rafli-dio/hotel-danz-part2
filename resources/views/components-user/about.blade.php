@@ -4,10 +4,10 @@
     <section class="description-about lg:w-[50%] text-center lg:text-left">
       <p class="text-sm font-medium text-gray-500">#AllAboutHotel</p>
       <h1 class="text-3xl lg:text-4xl font-bold leading-tight mt-4">
-        Comfort and <br> facilities come first.
+        Kenyamanan dan <br> fasilitas prioritas utama.
       </h1>
       <p class="mt-6 text-gray-600">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste nam blanditiis nesciunt molestiae ut tenetur perspiciatis saepe consectetur a placeat tempore id debitis, distinctio amet dicta facere quis ab enim, facilis minus! Ratione exercitationem adipisci perspiciatis est voluptas sint quas?
+        Kenyamanan dan fasilitas adalah prioritas utama kami dalam memberikan pengalaman menginap yang tak terlupakan. Nikmati layanan berkualitas, fasilitas modern, serta suasana yang menenangkan di setiap hotel dan resort kami. Dengan perhatian terhadap detail dan kepuasan pelanggan, kami memastikan Anda merasa seperti di rumah, di mana pun Anda berada.
       </p>
       <div class="statistic flex flex-col sm:flex-row justify-center lg:justify-start gap-6 mt-6">
         <h3 class="text-2xl font-bold text-blue-700">

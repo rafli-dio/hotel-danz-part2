@@ -118,17 +118,21 @@
               </select>
           </div>
 
-          <!-- Kamar -->
           <div class="mb-3">
               <label for="kamar_id" class="form-label">Kamar</label>
               <select class="form-control" id="kamar_id_update" name="kamar_id" required>
                   <option value="" disabled>Pilih Kamar Hotel</option>
                   @foreach($kamar as $kamars)
                       <option value="{{ $kamars->id }}" 
-                              data-kapasitas="{{ $kamars->tipeKamar->kapasitas_kamar }}" 
-                              data-harga="{{ $kamars->tipeKamar->harga_kamar }}"
-                              {{ $reservasis->kamar_id == $kamars->id ? 'selected' : '' }}>
+                          {{ $reservasis->kamar_id == $kamars->id ? 'selected' : '' }}>
                           {{ $kamars->nomor_kamar }} 
+                          @if($reservasis->kamar_id == $kamars->id)
+                              (Sedang Dipilih)
+                          @elseif($kamars->status_tersedia)
+                              (Tersedia)
+                          @else
+                              (Tidak Tersedia)
+                          @endif
                       </option>
                   @endforeach
               </select>

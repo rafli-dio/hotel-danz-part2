@@ -20,10 +20,11 @@ class ReservasiController extends Controller
      */
     public function index()
     {
-        $kamar = Kamar::with('tipeKamar')->where('status_tersedia', true)->get();
+        $reservasi = Reservasi::all();
+        $kamar = Kamar::where('status_tersedia', true)
+                     ->orWhereIn('id', Reservasi::pluck('kamar_id'))
+                     ->get();
         $tamu = Tamu::all();
-        $reservasi = Reservasi::with('kamar', 'tamu')->get();
-    
         return view('layouts-admin.pages.reservasi.index', compact('kamar', 'reservasi', 'tamu'));
     }
     
@@ -135,28 +136,6 @@ class ReservasiController extends Controller
         return redirect()->route('show-invoice', ['id' => $reservasi->id]);
     }
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -175,6 +154,7 @@ class ReservasiController extends Controller
         ]);
     
         $reservasi = Reservasi::findOrFail($id);
+        $kamarLama = $reservasi->kamar_id;
     
         $checkIn = Carbon::parse($request->tanggal_check_in);
         $checkOut = Carbon::parse($request->tanggal_check_out);
@@ -184,6 +164,12 @@ class ReservasiController extends Controller
         $hargaKamar = $kamar->tipeKamar->harga_kamar;
     
         $totalHarga = $days * $hargaKamar;
+    
+        if ($kamarLama != $request->kamar_id) {
+            Kamar::where('id', $kamarLama)->update(['status_tersedia' => true]);
+        }
+    
+        Kamar::where('id', $request->kamar_id)->update(['status_tersedia' => false]);
     
         $reservasi->update([
             'tamu_id' => $request->tamu_id,
@@ -195,8 +181,9 @@ class ReservasiController extends Controller
             'total_harga' => $totalHarga,
         ]);
     
-        return redirect()->route('get-reservasi');
+        return redirect()->route('get-reservasi')->with('success', 'Reservasi berhasil diperbarui');
     }
+    
     
 
 

@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Tamu;
+use App\Models\Reservasi;
+use App\Models\Kamar;
+use App\Models\User;
 
 class DashboardAdminController extends Controller
 {
@@ -13,7 +17,11 @@ class DashboardAdminController extends Controller
      */
     public function index()
     {
-        return view('layouts-admin.index');
+        $totalTamu = Tamu::count();
+        $totalReservasi = Reservasi::count();
+        $totalKamar = Kamar::count();
+        $totalStaf = User::where('role', 'staf')->count();
+        return view('layouts-admin.index', compact('totalTamu','totalReservasi','totalKamar','totalStaf'));
     }
 
     /**

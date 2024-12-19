@@ -31,6 +31,8 @@ function updateLabel(inputId, labelId) {
 }
 updateLabel("check-in", "check-in-label");
 updateLabel("check-out", "check-out-label");
+updateLabel("tanggal_check_in", "check-in-label-tamu");
+updateLabel("tanggal_check_out", "check-in-label-tamu");
 
 // slider facilities
 const slider = document.getElementById("slider");

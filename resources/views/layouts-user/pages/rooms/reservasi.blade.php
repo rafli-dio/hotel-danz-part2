@@ -10,11 +10,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    
+    <style>
+      input[type="date"]::-webkit-datetime-edit {
+        color: black; 
+      }
+
+      input[type="date"]::-webkit-inner-spin-button {
+          display: block;
+      }
+
+    </style>
 </head>
 <body>
 @include('components-user.navbar')
-
 <div class="container mx-auto mt-[150px] mb-[100px]">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
     <!-- Form Booking (Kiri) -->
@@ -28,8 +36,7 @@
           <input type="text" id="tamu_id" class="form-control bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-[400px] text-center" value="{{ $tamu->nama_panjang }}" readonly>
           <input type="hidden" name="tamu_id" value="{{ $tamu->id }}">
         </div>
-
-                <!-- Jumlah Orang -->
+        <!-- Jumlah Orang -->
         <div class="mb-4">
           <label for="jumlah_orang" class="block text-sm font-medium">Jumlah Orang</label>
           <select name="jumlah_orang" id="jumlah_orang" class="form-control  bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-[400px] text-center" required>
@@ -39,7 +46,6 @@
             <option value="6">6 Orang</option>
           </select>
         </div>
-
         <!-- Kamar -->
         <div class="mb-4">
           <label for="kamar_id" class="block text-sm font-medium">Kamar</label>
@@ -50,7 +56,6 @@
             @endforeach
           </select>
         </div>
-
         <!-- Kota -->
         <div class="mb-4">
           <label for="kota" class="block text-sm font-medium">Kota</label>
@@ -61,7 +66,6 @@
             <option value="Bandung">Bandung</option>
           </select>
         </div>
-
         <!-- Tanggal Check-In -->
         <div class="mb-4">
           <label for="tanggal_check_in" class="block text-sm font-medium text-gray-700">Tanggal Check-In</label>
@@ -72,7 +76,6 @@
             class="form-control bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-[400px] text-center text-gray-900" 
             required>
         </div>
-
         <!-- Tanggal Check-Out -->
         <div class="mb-4">
           <label for="tanggal_check_out" class="block text-sm font-medium text-gray-700">Tanggal Check-Out</label>
@@ -83,20 +86,14 @@
             class="form-control bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-[400px] text-center text-gray-900" 
             required>
         </div>
-
-
-
-
         <!-- Total Harga -->
         <div class="mb-4">
           <label for="total_harga" class="block text-sm font-medium">Total Harga</label>
           <input type="text" id="total_harga" class="form-control  bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 w-[400px] text-center" readonly>
         </div>
-
         <button type="submit" class="btn btn-primary bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded w-[400px]">Booking Sekarang</button>
       </form>
     </div>
-
     <!-- Gambar Kamar (Kanan) -->
     <div class="relative">
       <img src="{{ asset('storage/' . $tipe->gambar_kamar) }}" alt="{{ $tipe->nama_tipe_kamar }}" class="w-full h-full object-cover rounded-lg shadow-lg">
@@ -122,7 +119,6 @@
       if (!isNaN(checkInDate) && !isNaN(checkOutDate) && checkOutDate > checkInDate) {
         const diffTime = Math.abs(checkOutDate - checkInDate);
         const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
-
         const selectedOption = kamarSelect.options[kamarSelect.selectedIndex];
         const hargaKamar = parseFloat(selectedOption.getAttribute('data-harga'));
 
@@ -138,7 +134,6 @@
     tanggalCheckOut.addEventListener('change', calculateTotal);
     kamarSelect.addEventListener('change', calculateTotal);
   });
-
 </script>
 </body>
 </html>

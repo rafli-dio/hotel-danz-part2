@@ -19,7 +19,8 @@
     </div>
     <button class="bg-blue-700 hover:bg-blue-900 text-white mt-4 p-3 pl-4 font-semibold rounded-full hover:cursor-pointer">Get's Journey <i class="fas fa-arrow-right text-white ml-auto pl-4"></i></button>
     </section>
-
+    <label for="">oke</label>
+    <input type="date">
     <!-- Section Image -->
     <section class="image-about lg:w-[40%] flex justify-center lg:justify-end">
       <img src="{{asset('assets/images/about-img.png')}}" alt="about-img" class="">

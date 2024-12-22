@@ -89,7 +89,7 @@
     </div>
     <div class="card-body p-0">
       <div class="table-responsive">
-      <table class="table table-striped table-md">
+      <table id="dataTable" class="table table-striped table-md">
             <thead>
                 <tr>
                     <th>No</th>

@@ -16,7 +16,6 @@
         </a>
       </li>
       @endif
-
       <li class="menu-header">Website</li>
       @if(auth()->user()->role == "admin")
         <li class="nav-item dropdown {{ Request::is('staf*', 'tamu*') ? 'active' : '' }}">

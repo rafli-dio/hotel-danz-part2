@@ -33,7 +33,7 @@
     <!-- Address -->
     <div>
       <h3 class="font-semibold mb-4">Address</h3>
-      <p class="text-gray-400">Jl. A. Yani, Mendungan, Pabelan, Kec. Kartasura, Kabupaten Sukoharjo, Jawa Tengah <br>Maine<br>57162</p>
+      <p class="text-gray-400">Jl. A. Yani, Mendungan, Pabelan, Kec. Kartasura, Kabupaten Sukoharjo, Jawa Tengah <br>Pos<br>57162</p>
     </div>
 
     <!-- Contact -->

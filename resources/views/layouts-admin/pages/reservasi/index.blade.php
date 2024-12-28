@@ -191,7 +191,7 @@
     </div>
     <div class="card-body p-0">
       <div class="table-responsive">
-      <table id="dataTable" class="table table-striped table-md">
+      <table id="dataTable" class="table table-striped table-md text-center">
             <thead>
                 <tr>
                     <th>No</th>
@@ -232,7 +232,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="6" class="text-center">Tidak ada data tamu.</td>
+                    <td colspan="6" class="text-center">Tidak ada data reservasi.</td>
                 </tr>
                 @endforelse
             </tbody>

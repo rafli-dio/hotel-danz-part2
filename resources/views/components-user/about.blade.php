@@ -1,4 +1,4 @@
-<div class="room mx-auto max-w-7xl px-6 py-12 mt-[40px] shadow-lg rounded-2xl">
+<div class="room mx-auto max-w-7xl px-6 py-12 mt-[40px] shadow-lg rounded-2xl" id="about">
   <div class="flex flex-col lg:flex-row items-center lg:items-start justify-center lg:justify-end gap-12">
     <!-- Section Description -->
     <section class="description-about lg:w-[50%] text-center lg:text-left">

@@ -1,4 +1,4 @@
-<div class="container mx-auto mt-[40px] px-4">
+<div class="container mx-auto mt-[40px] px-4" id="rooms">
   <!-- Title Section -->
   <div class="flex justify-between items-center mb-6">
     <h2 class="text-2xl font-semibold">Popular Rooms</h2>

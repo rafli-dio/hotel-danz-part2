@@ -27,13 +27,13 @@
                         <a href="{{route('get-home-tamu')}}" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:hover:text-yellow-500">Home</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:hover:text-yellow-500">About</a>
+                        <a href="#about" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:hover:text-yellow-500">About</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:hover:text-yellow-500">Rooms</a>
+                        <a href="#rooms" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:hover:text-yellow-500">Rooms</a>
                     </li>
                     <li>
-                        <a href="#" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:hover:text-yellow-500">Facilities</a>
+                        <a href="#facilities" class="block py-2 px-3 text-black rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:hover:text-yellow-500">Facilities</a>
                     </li>
                     @guest
                         <li>

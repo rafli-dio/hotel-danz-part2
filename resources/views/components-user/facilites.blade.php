@@ -1,4 +1,4 @@
-<div class="container mx-auto px-6 py-12 relative mt-[60px]">
+<div class="container mx-auto px-6 py-12 relative mt-[60px]" id="facilities">
   <!-- Description Section -->
   <div class="flex flex-col lg:flex-row justify-between items-center mb-12">
     <div class="lg:w-1/2 mb-6 lg:mb-0 p-3">
